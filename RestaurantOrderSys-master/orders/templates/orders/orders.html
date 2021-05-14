@@ -19,6 +19,7 @@
           <th scope="col">When?</th>
           <th scope="col">Order</th>
           <th scope="col">Amount Paid</th>
+          <th scope="col">Token</th>
         </tr>
         </thead>
         <tbody id = "orders_table">
@@ -38,7 +39,9 @@
                   {% endfor %}
                 </ul>
               </td>
-              <td>£{{row.price}}</td>
+              <td>T{{row.price}}</td>
+
+              <td>{{row.token}}</td>
             </tr>
           {% endfor %}
         </tbody>

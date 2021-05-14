@@ -1,10 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
-from .models import Category, RegularPizza, SicilianPizza, Toppings, Sub, Pasta, Salad, UserOrder, SavedCarts
+from .models import Category, RegularPizza, SicilianPizza, Toppings, Hawka, Pasta, Salad, UserOrder, SavedCarts
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import logout, authenticate, login
-import json
+import json, string,secrets
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
@@ -73,9 +73,9 @@ def salad(request):
         return redirect("orders:login")
 
 
-def subs(request):
+def hawka(request):
     if request.user.is_authenticated:
-        return render(request, "orders/sub.html", context = {"dishes":Sub.objects.all})
+        return render(request, "orders/sub.html", context = {"dishes":Hawka.objects.all})
     else:
         return redirect("orders:login")
 
@@ -110,10 +110,11 @@ def checkout(request):
         cart = json.loads(request.POST.get('cart'))
         price = request.POST.get('price_of_cart')
         username = request.user.username
+        token=createtoken()
         response_data = {}
         list_of_items = [item["item_description"] for item in cart]
 
-        order = UserOrder(username=username, order=list_of_items, price=float(price), delivered=False) #create the row entry
+        order = UserOrder(username=username, order=list_of_items, price=float(price), token=token,delivered=False) #create the row entry
         order.save() #save row entry in database
 
         response_data['result'] = 'Order Recieved!'
@@ -132,13 +133,17 @@ def view_orders(request):
     if request.user.is_superuser:
         #make a request for all the orders in the database
         rows = UserOrder.objects.all().order_by('-time_of_order')
+
         #orders.append(row.order[1:-1].split(","))
 
         return render(request, "orders/orders.html", context = {"rows":rows})
     else:
         rows = UserOrder.objects.all().filter(username = request.user.username).order_by('-time_of_order')
         return render(request, "orders/orders.html", context = {"rows":rows})
-
+def createtoken():
+    alphabet = string.ascii_letters + string.digits
+    token = ''.join(secrets.choice(alphabet.upper()) for i in range(3))
+    return token
 def mark_order_as_delivered(request):
     if request.method == 'POST':
         id = request.POST.get('id')

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib import admin
-from .models import Category, RegularPizza, SicilianPizza, Toppings, Sub, Pasta, Salad, UserOrder, SavedCarts
+from .models import Category, RegularPizza, SicilianPizza, Toppings, Hawka, Pasta, Salad, UserOrder, SavedCarts
 from tinymce.widgets import TinyMCE
 from django.db import models
 
@@ -24,7 +24,7 @@ admin.site.register(Category,CategoryAdmin)
 admin.site.register(RegularPizza, RegularPizzaAdmin)
 admin.site.register(SicilianPizza, SicilianPizzaAdmin)
 admin.site.register(Toppings)
-admin.site.register(Sub)
+admin.site.register(Hawka)
 admin.site.register(Pasta)
 admin.site.register(Salad)
 admin.site.register(UserOrder)

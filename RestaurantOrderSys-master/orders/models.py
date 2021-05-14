@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
-
+import string
+import secrets
 # Create your models here.
 
 class Category(models.Model):
@@ -43,15 +44,15 @@ class Toppings(models.Model):
         return f"{self.topping_name}"
 
 
-class Sub(models.Model):
+class Hawka(models.Model):
     #example row :: meatball , 5.00 , 6.50
-    sub_filling = models.CharField(max_length=200)
+    hawka = models.CharField(max_length=200)
     small_price = models.DecimalField(max_digits=6, decimal_places=2)
     large_price = models.DecimalField(max_digits=6, decimal_places=2)
 
     def __str__(self):
         #overriding the string method to get a good representation of it in string format
-        return f"Sub : {self.sub_filling}"
+        return f"hawka : {self.hawka_filling}"
 
 class Pasta(models.Model):
     dish_name = models.CharField(max_length=200)
@@ -76,7 +77,9 @@ class UserOrder(models.Model):
     order = models.TextField() #this will be a string representation of the cart from localStorage
     price = models.DecimalField(max_digits=6, decimal_places=2) #how much was the order
     time_of_order  = models.DateTimeField(default=datetime.now, blank=True)
+    token=models.TextField()
     delivered = models.BooleanField()
+
 
     def __str__(self):
         #overriding the string method to get a good representation of it in string format
