@@ -1,19 +1,21 @@
 from django.urls import path
 
 from . import views
+from django.conf.urls import url
 
 app_name = "orders"
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("login", views.login_request, name="login"),
+    path("login/    ", views.login_request, name="login"),
     path("register/", views.register, name="register"),
     path("logout", views.logout_request, name="logout"),
     path("Pizza", views.pizza, name="pizza"),
     path("Pasta", views.pasta, name="pasta"),
     path("Salad", views.salad, name="salad"),
+    url(r'^profile/(?P<username>\w+)/$', views.profile, name='profile'),
     path("Hawka", views.hawka, name="hawka"),
-  path("directions", views.directions, name="directions"),
+    path("directions", views.directions, name="directions"),
     path("hours", views.hours, name="hours"),
     path("contact", views.contact, name="contact"),
     path("cart", views.cart, name="cart"),

@@ -20,6 +20,21 @@
       <div class="row justify-content-center">
         <p>If you have any questions or comments or would like to get on our email list you can email us at pinocchiospizza1@gmail.com</p>
       </div>
+
+
+   <div class="dropdown">
+
+
+                </div>
+           {% for profile in profiles %}
+                  <a href="{%url 'profile' user.username%}">
+
+                      <span class="text-default">{{user.username}}</span>
+                      <small class="text-muted d-block mt-1">Your Account</small>
+                    </span>
+                  </a>
+
+        {% endfor %}
     </div>
 
 {% endblock %}

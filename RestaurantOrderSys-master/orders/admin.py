@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib import admin
-from .models import Category, RegularPizza, SicilianPizza, Toppings, Hawka, Pasta, Salad, UserOrder, SavedCarts
+from .models import Category, RegularPizza, SicilianPizza, Toppings, Hawka, Pasta, Salad, UserOrder, SavedCarts,Profile
 from tinymce.widgets import TinyMCE
 from django.db import models
 
@@ -19,6 +19,7 @@ class SicilianPizzaAdmin(admin.ModelAdmin):
             models.TextField: {'widget': TinyMCE()},
             }
 
+admin.site.register(Profile)
 
 admin.site.register(Category,CategoryAdmin)
 admin.site.register(RegularPizza, RegularPizzaAdmin)
