@@ -52,7 +52,7 @@ class Hawka(models.Model):
 
     def __str__(self):
         #overriding the string method to get a good representation of it in string format
-        return f"hawka : {self.hawka_filling}"
+        return f"hawka : {self.hawka}"
 
 class Pasta(models.Model):
     dish_name = models.CharField(max_length=200)
@@ -77,7 +77,7 @@ class UserOrder(models.Model):
     order = models.TextField() #this will be a string representation of the cart from localStorage
     price = models.DecimalField(max_digits=6, decimal_places=2) #how much was the order
     time_of_order  = models.DateTimeField(default=datetime.now, blank=True)
-    token=models.TextField()
+    token=models.TextField(default="A1")
     delivered = models.BooleanField()
 
 

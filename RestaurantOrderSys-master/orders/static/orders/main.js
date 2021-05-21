@@ -153,7 +153,7 @@ function load_cart(){
       var value = row.getElementsByTagName("td")[0].innerHTML;
       var description = row.getElementsByTagName("td")[1].innerHTML;
       var r = confirm("Proceed to delete '"+description+ "' from cart?");
-      if (r == true) {
+      if (r === true) {
         document.getElementById("cart_body").deleteRow(value-1);
         //edit the cart
         cart.splice(value-1,1) //this is how you remove elements from a list in javascript
